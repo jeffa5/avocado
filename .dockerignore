@@ -1,0 +1,14 @@
+*
+! build.sh
+! flake.nix
+! flake.lock
+! CMakeLists.txt
+! cityhash
+! dpdk-build.sh.in
+! eRPC
+! SpeicherDPDK
+! src
+! dpdk-avocado.patch
+! dpdk-config.patch
+! folly-scone.patch
+! openssl-new.patch

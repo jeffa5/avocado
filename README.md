@@ -5,6 +5,7 @@ Avocado is secure distributed in-memory key-value store. It leverages SGX to pro
 ## Getting started
 
 ### Dependencies
+
 * [cmake](https://cmake.org/)
 * [fmt](https://fmt.dev/latest/index.html)
 * [glog](https://github.com/google/glog)
@@ -19,8 +20,10 @@ Avocado is secure distributed in-memory key-value store. It leverages SGX to pro
 * [scone](https://sconedocs.github.io/)
 
 ### Building
+
 You can build the non-secure version by doing the following
-```[bash]
+
+```bash
 git submodule update --init --recursive
 mkdir build
 cd build
@@ -29,12 +32,37 @@ cmake --build . --parallel
 ```
 
 You can build the secure version with the scone images. However, you might be required to patch the folly library with the provided [patch](folly-scone.patch). You should also set the SCONE flag in cmake
-```[bash]
+
+```bash
 cmake .. -DSCONE=ON
 ```
 
+#### Docker
+
+You can build the virtual (insecure) image with:
+
+```bash
+docker build -f Dockerfile -t avocado:virtual --build-arg=platform=virtual .
+```
+
+Or for secure mode (SGX):
+
+```bash
+docker build -f Dockerfile -t avocado:sgx --build-arg=platform=sgx .
+```
+
 #### Notes
+
 We used a internal development version of scone to run Avocado. We have not tested it with the publicly available version.
 
 ### Running
-The build process will generate a benchmark application ```build/src/server``` which you can use to run the benchmark, see the ```--help``` flag for information.
+
+The build process will generate a benchmark application `build/src/server` which you can use to run the benchmark, see the `--help` flag for information.
+
+#### Docker
+
+Try running the docker image with:
+
+```bash
+docker run --rm -it avocado:virtual /app/server
+```
